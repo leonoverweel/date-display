@@ -1,4 +1,29 @@
 /**
+ * Displays the delta between the specified data and now, in the specified format, as the innerText of the specified element.
+ * @param {Element} element - The element in which to display the time delta
+ * @param {Date} date - The date to compare to now
+ * @param {string} format - The format in which to display the time delta
+ */
+function display(elementId, date, formatBefore, formatAfter) {
+	
+	// Make sure the element, date and formatBefore are present
+	if(elementId == null || document.getElementById(elementId) == null || date == null || formatBefore == null)
+		return;
+	
+	// Display the appropriately formatted time delta in the element
+	var element = document.getElementById(elementId);
+	
+	if(date - Date.now() > 0)
+		element.innerText = generateDateDelta(date, formatBefore);
+	else
+		(formatAfter == null) ? element.innerText = date.toString : element.innerText = generateDateDelta(date, formatAfter);
+		
+	setTimeout( function() {
+		display(elementId, date, formatBefore, formatAfter);
+	});
+}
+
+/**
  * Replaces all the {key}s in the input string with values from the replacements object
  * @param {string} string - The string with {key}s to fill
  * @param {object} replacements - The key-value pairs to fill the string with
@@ -57,7 +82,7 @@ function generateDateDelta(date, format) {
 		return "";
 	
 	var now = Date.now();
-	var delta = date - now;
+	var delta = Math.abs(date - now);
 	
 	// Calculate complete milliseconds, seconds, minutes, hours, days, weeks
 	var milC = delta;

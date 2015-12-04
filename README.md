@@ -1,10 +1,10 @@
-# date-display
+# time-delta
 
-You can use date-display to display the time difference between a specified date (with a time) and now, in a variety of formats. The project was made specifically with countdowns until events in mind. 
+You can use time-delta to display the time difference between a specified date (with a time) and now, in a variety of formats. The project was made specifically with countdowns until events in mind. 
 
 ## Format string
 
-Generally, the format string consists of a combination of text that will be displayed as-is and tags that date-display replaces with the entities specified below.
+Generally, the format string consists of a combination of text that will be displayed as-is and tags that time-delta replaces with the entities specified below.
 
 ### Partial tags
 
