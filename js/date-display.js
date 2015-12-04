@@ -9,7 +9,7 @@ function fill(string, replacements) {
 	// Return null if there's no string to fill
 	if(string == null)
 		return null;
-		
+	
 	// Return the string if there are no replacements to be made
 	if(replacements == null || Object.keys(replacements).length == 0)
 		return string;
@@ -53,5 +53,36 @@ function fill(string, replacements) {
  * @returns {string} The date delta
  */
 function generateDateDelta(date, format) {
-	return("to do");
+	if(date == null || !(date instanceof Date) || format == null || !(typeof format === "string"))
+		return "";
+	
+	var now = Date.now();
+	var delta = date - now;
+	
+	// Calculate complete milliseconds, seconds, minutes, hours, days, weeks
+	var milC = delta;
+	var secC = Math.floor(delta / 1000);
+	var minC = Math.floor(delta / 60000);
+	var hrC = Math.floor(delta / 360000);
+	var dayC = Math.floor(delta / 86400000);
+	var wkC = Math.floor(delta / 604800000);
+	
+	// Create replacements object
+	var replacements = {
+		"mil-c": milC.toLocaleString(),
+		"sec-c": secC.toLocaleString(),
+		"min-c": minC.toLocaleString(),
+		"hr-c": hrC.toLocaleString(),
+		"day-c": dayC.toLocaleString(),
+		"wk-c": wkC.toLocaleString(),
+		
+		"mil": milC.toLocaleString(),
+		"sec": (secC % 60).toLocaleString(),
+		"min": (minC % 60).toLocaleString(),
+		"hr": (hrC % 24).toLocaleString(),
+		"day": (dayC % 7).toLocaleString(),
+		"wk": wkC.toLocaleString()
+	};
+	
+	return fill(format, replacements);
 }

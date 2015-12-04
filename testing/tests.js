@@ -1,73 +1,101 @@
-QUnit.test("Test the fill() function", function( assert ) {
-  // No parameters
-  assert.strictEqual(fill(), null, "No parameters");
+/**
+ * Test the fill() function
+ */
+QUnit.test("Test the fill() function", function (assert) {
   
-  // Empty string parameter
-  assert.strictEqual(fill(""), "", "Empty string parameter");
+  // No params
+  assert.strictEqual(fill(), null, "No params");
   
-  // String parameter
-  assert.strictEqual(fill("Test"), "Test", "String parameter");
+  // Empty string param
+  assert.strictEqual(fill(""), "", "Empty string param");
   
-  // String parameter and non-object replacements parameter
+  // String param
+  assert.strictEqual(fill("Test"), "Test", "String param");
+  
+  // String param and non-object replacements param
   assert.strictEqual(
     fill("Test", 3),
     "Test",
-    "String parameter and non-object replacements parameter");
+    "String param and non-object replacements param");
     
-  // String parameter (with no keys) and a replacements parameter
+  // String param (no keys) and a replacements param
   assert.strictEqual(
-    fill("Test", {"test": "filled"}),
+    fill("Test", { "test": "filled" }),
     "Test",
-    "String parameter with no keys and a replacements parameter");
+    "String param with no keys and a replacements param");
   
-  // String parameter (with a key) and a replacements parameter
+  // String param (with a key) and a replacements param
   assert.strictEqual(
     fill(
-      "I am {age} years old", 
+      "I am {age} years old",
       {
         "age": "eighteen"
-      }), 
+      }),
     "I am eighteen years old",
-    "String parameter (with a key) and a replacements parameter");
+    "String param (with a key) and a replacements param");
     
-  // String parameter (with a wrong key) and a replacements parameter
+  // String param (with a wrong key) and a replacements param
   assert.strictEqual(
     fill(
-      "I am {age} years old.", 
+      "I am {age} years old.",
       {
         "agee": "eighteen"
-      }), 
+      }),
     "I am  years old.",
-    "String parameter (with a wrong key) and a replacements parameter");
+    "String param (with a wrong key) and a replacements param");
   
-  // String parameter (with a key) and a replacements parameter with a non-string value
+  // String param (with a key) and a replacements param with a non-string value
   assert.strictEqual(
     fill(
-      "I am {age} years old.", 
+      "I am {age} years old.",
       {
         "age": 18
-      }), 
+      }),
     "I am 18 years old.",
-    "String parameter (with a wrong key) and a replacements parameter");
+    "String param (with a wrong key) and a replacements param");
   
-  // String parameter (with a key) and a replacements parameter with the key multiple times
+  // String param (with a key) and a replacements param with the key multiple times
   assert.strictEqual(
     fill(
-      "I am {age} years old, so I have lived for {age} years.", 
+      "I am {age} years old, so I have lived for {age} years.",
       {
         "age": "eighteen"
-      }), 
+      }),
     "I am eighteen years old, so I have lived for eighteen years.",
-    "String parameter (with a key) and a replacements parameter with the key multiple times");
+    "String param (with a key) and a replacements param with the key multiple times");
     
-  // String parameter (with multiple keys) and a replacements parameter with multiple keys
+  // String param (with multiple keys) and a replacements param with multiple keys
   assert.strictEqual(
     fill(
-      "I am {age} years old, and my favorite TV show is {show}.", 
+      "I am {age} years old, and my favorite TV show is {show}.",
       {
         "age": "eighteen",
         "show": "Sherlock"
-      }), 
+      }),
     "I am eighteen years old, and my favorite TV show is Sherlock.",
-    "String parameter (with multiple keys) and a replacements parameter with multiple keys");
+    "String param (with multiple keys) and a replacements param with multiple keys");
+});
+
+/**
+ * Test the generateDateDelta() function
+ */
+QUnit.test("Test the generateDateDelta() function", function (assert) {
+  
+  // No params
+  assert.strictEqual(generateDateDelta(), "", "No params");
+  
+  // None-date first param, no second param
+  assert.strictEqual(generateDateDelta("2015-12-04"), "", "None-date first param, no second param");
+  
+  // Date first param, no second param
+  assert.strictEqual(generateDateDelta(new Date("2015-12-04")), "", "Date first param, no second param");
+  
+  // Date first param, non-string second param
+  assert.strictEqual(generateDateDelta(new Date("2015-12-04"), 2015), "", "Date first param, non-string second param");
+
+  // Date first param, string second param (no keys)
+  assert.strictEqual(generateDateDelta(
+    new Date("2015-12-18"), "Input"), 
+    "Input", 
+    "Date first param, string second param");
 });
