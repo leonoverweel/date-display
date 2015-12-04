@@ -2,9 +2,13 @@
 
 You can use time-delta to display the time difference between a specified date (with a time) and now, in a variety of formats. The project was made specifically with countdowns until events in mind. 
 
+See 'demo/demo.html' for sample code.
+
 ## Format string
 
 Generally, the format string consists of a combination of text that will be displayed as-is and tags that time-delta replaces with the entities specified below.
+
+In the most common use cases, your largest time unit should use a complete tag, and your other time units should use a partial tag.
 
 ### Partial tags
 
