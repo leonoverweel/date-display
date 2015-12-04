@@ -5,7 +5,45 @@
  * @returns {string} The original string with all {key}s replaced with appropriate values
  */
 function fill(string, replacements) {
-	return "qunit test";
+	
+	// Return null if there's no string to fill
+	if(string == null)
+		return null;
+		
+	// Return the string if there are no replacements to be made
+	if(replacements == null || Object.keys(replacements).length == 0)
+		return string;
+	
+	var result = "";
+	var current = "";
+	
+	// Loop through the string
+	for(var i = 0; i < string.length; i++) {
+		
+		// Append non-key characters to the result
+		if(string[i] != "{")
+			result += string[i];
+			
+		else {
+			
+			// Get the current key
+			for(var j = i + 1; j < string.length && string[j] != "}"; j++) {
+				current += string[j];
+			}
+			
+			// Add the current key's value to the result
+			if(string[j] == "}" && current in replacements) {
+				result += replacements[current].toString();
+			}
+			
+			// Continue going through the string
+			current = "";
+			i = j;
+		}
+	}
+	
+	// Return
+	return result;
 }
 
 /**
