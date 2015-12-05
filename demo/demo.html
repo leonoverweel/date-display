@@ -6,18 +6,25 @@
 	<body>
 		<p>The year 2015 <span id="time-1">starts on January 1st, 2015</span>.</p>
 		<p>The year 2017 <span id="time-2">starts on January 1st, 2016</span>.</p>
+		<p>My 19th birthday <span id="time-3">in on April 18th, 2016</span>.</p>
 		<script>
 			display(
 				"time-1", 
 				new Date("2015-01-01T00:00:00"), 
-				"starts in {wk-c} weeks, {day} days, {hr} hours, {min} minutes and {sec} seconds",
-				"started {wk-c} weeks, {day} days, {hr} hours, {min} minutes and {sec} seconds ago"
+				"starts in {wk-c} week[wk!=1:s], {day} day[day!=1:s], {hr} hour[hr!=1:s], {min} minute[min!=1:s] and {sec} second[sec!=1:s]",
+				"started {wk-c} week[wk!=1:s], {day} day[day!=1:s], {hr} hour[hr!=1:s], {min} minute[min!=1:s] and {sec} second[sec!=1:s] ago"
 			);
 			display(
 				"time-2", 
 				new Date("2017-01-01T00:00:00"), 
-				"starts in {wk-c} weeks, {day} days, {hr} hours, {min} minutes and {sec} seconds",
-				"started {wk-c} weeks, {day} days, {hr} hours, {min} minutes and {sec} seconds ago"
+				"starts in {wk-c} week[wk!=1:s], {day} day[day!=1:s], {hr} hour[hr!=1:s], {min} minute[min!=1:s] and {sec} second[sec!=1:s]",
+				"started {wk-c} week[wk!=1:s], {day} day[day!=1:s], {hr} hour[hr!=1:s], {min} minute[min!=1:s] and {sec} second[sec!=1:s] ago"
+			);
+			display(
+				"time-3",
+				new Date("2016-04-18T13:50:00"),
+				"is {day-c} day[day-c!=1:s] and {hr} hour[hr!=1:s] from now[day-c<7:. That's in less than one week]",
+				"was {day-c} day[day-c!=1:s] ago"
 			);
 		</script>
 	</body>

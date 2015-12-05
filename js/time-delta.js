@@ -197,5 +197,8 @@ function generateDateDelta(date, format) {
 		"wk": wkC.toLocaleString()
 	};
 	
-	return fill(format, replacements);
+	var result = fill(format, replacements);
+	result = filter(result, replacements);
+	
+	return result;
 }
