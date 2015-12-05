@@ -50,7 +50,8 @@ function applyComparator(input, variables) {
  * Displays the delta between the specified data and now, in the specified format, as the innerText of the specified element.
  * @param {Element} element - The element in which to display the time delta
  * @param {Date} date - The date to compare to now
- * @param {string} format - The format in which to display the time delta
+ * @param {string} formatBefore - The format in which to display the time delta
+ * @param {string} formatAfter - Optional: a different format to use after the date has passed
  */
 function display(elementId, date, formatBefore, formatAfter) {
 	
@@ -60,15 +61,16 @@ function display(elementId, date, formatBefore, formatAfter) {
 	
 	// Display the appropriately formatted time delta in the element
 	var element = document.getElementById(elementId);
-	
 	if(date - Date.now() > 0)
 		element.innerText = generateDateDelta(date, formatBefore);
 	else
-		(formatAfter == null) ? element.innerText = date.toString : element.innerText = generateDateDelta(date, formatAfter);
+		(formatAfter == null) ? 
+			element.innerText = generateDateDelta(date, formatBefore) : 
+			element.innerText = generateDateDelta(date, formatAfter);
 		
 	setTimeout( function() {
 		display(elementId, date, formatBefore, formatAfter);
-	});
+	}, 1000);
 }
 
 /**
