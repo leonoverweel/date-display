@@ -99,3 +99,68 @@ QUnit.test("Test the generateDateDelta() function", function (assert) {
     "Input", 
     "Date first param, string second param");
 });
+
+/**
+ * Test the filter() function
+ */
+QUnit.test("Test the filter() function", function (assert) {
+  
+  // No params
+  assert.strictEqual(generateDateDelta(), "", "No params");
+  
+  // Greater than, actually greater than
+  assert.strictEqual(
+    filter(
+      "Only 2 day[day>1:s] until Monday!",
+      {
+        "day": 2
+      }
+    ),
+    "Only 2 days until Monday!",
+    "Greater than, actually greater than");
+    
+  // Greater than, not actually greater than
+  assert.strictEqual(
+    filter(
+      "Only 1 day[day>1:s] until Monday!",
+      {
+        "day": 1
+      }
+    ),
+    "Only 1 day until Monday!",
+    "Greater than, not actually greater than");
+    
+  // Less than, actually less than
+  assert.strictEqual(
+    filter(
+      "4 days until Christmas.[day<5: That's less than 5 days!]",
+      {
+        "day": 4
+      }
+    ),
+    "4 days until Christmas. That's less than 5 days!",
+    "Less than, actually less than");
+
+  // Less than, not actually less than
+  assert.strictEqual(
+    filter(
+      "4 days until Christmas.[day<5: That's less than 5 days!]",
+      {
+        "day": 5
+      }
+    ),
+    "4 days until Christmas.",
+    "Less than, not actually less than");
+    
+  // Equal to than, actually equal to
+  assert.strictEqual(
+    filter(
+      "7 days until New Years.[day=7: Exactly one week!]",
+      {
+        "day": 7
+      }
+    ),
+    "7 days until New Years. Exactly one week!",
+    "Equal to than, actually equal to");
+
+});

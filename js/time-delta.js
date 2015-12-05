@@ -72,6 +72,69 @@ function fill(string, replacements) {
 }
 
 /**
+ * Removes parts of the string depending on whether the conditions for that part are satisfied
+ * @param {string} string - The string to filter
+ * @param {object} conditions - The current conditions to compare the string to
+ */
+function filter(string, conditions) {
+	if(string == null || !(typeof string === "string") || conditions == null)
+		return string;
+		
+	var result = "";
+	var current = "";
+	
+	// Loop through the string
+	for(var i = 0; i < string.length; i++) {
+		
+		// Append non-key characters to the result
+		if(string[i] != "[")
+			result += string[i];
+			
+		else {
+			
+			// Get the current key
+			for(var j = i + 1; j < string.length && string[j] != "]"; j++) {
+				current += string[j];
+			}
+			
+			var conditional = current.split(":");
+			if(conditional.length === 2) {
+				
+				// Greater than
+				if(conditional[0].indexOf(">") != -1) {
+					var condition = conditional[0].split(">");
+					if(condition.length === 2 && conditions[condition[0]] > parseInt(condition[1]))
+						result += conditional[1];
+				}
+				
+				// Less than
+				else if(conditional[0].indexOf("<") != -1) {
+					var condition = conditional[0].split("<");
+					if(condition.length === 2 && conditions[condition[0]] < parseInt(condition[1]))
+						result += conditional[1];
+				}
+				
+				// Equal to
+				else if(conditional[0].indexOf("=") != -1) {
+					var condition = conditional[0].split("=");
+					if(condition.length === 2 && conditions[condition[0]] == parseInt(condition[1]))
+						result += conditional[1];
+				}
+			}
+			else {
+				result += current;
+			}
+			
+			// Continue going through the string
+			current = "";
+			i = j;
+		}
+	}
+	
+	return result;
+}
+
+/**
  * Generates the delta between the specified data and now, in the specified format.
  * @param {Date} date - The date to compare to now
  * @param {string} format - The format in which to display the time delta
