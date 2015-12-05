@@ -188,6 +188,9 @@ QUnit.test("Test the applyComparator() function", function (assert) {
   assert.strictEqual(applyComparator("1<=2"), true, "1<=2 === true");
   assert.strictEqual(applyComparator("2<=2"), true, "2<=2 === true");
   
+  assert.strictEqual(applyComparator("2!=1"), true, "2!=1 === true");
+  assert.strictEqual(applyComparator("2!=2"), false, "2!=2 === false");
+  
   // Test variables
   assert.strictEqual(applyComparator("num>1", {"num":2}), true, "num>1 === true (num=2)");
   assert.strictEqual(applyComparator("2>num", {"num":1}), true, "2>num === true (num=1)");

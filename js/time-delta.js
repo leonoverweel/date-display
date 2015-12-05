@@ -7,7 +7,7 @@
 function applyComparator(input, variables) {
 	
 	// Get the location of the start of the comparator
-	var index = input.search(/=|<|>/);
+	var index = input.search(/=|<|>|!/);
 	
 	// Make sure input works
 	if(input.length < 2 || index < 1 || index + 1 === input.length)
@@ -41,6 +41,7 @@ function applyComparator(input, variables) {
 		case "=": return left === right;			
 		case ">=": return left >= right;
 		case "<=": return left <= right;
+		case "!=": return left != right;
 		default: return false;
 	}
 }
