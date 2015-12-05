@@ -164,3 +164,40 @@ QUnit.test("Test the filter() function", function (assert) {
     "Equal to than, actually equal to");
 
 });
+
+/**
+ * Test the applyComparator() function
+ */
+QUnit.test("Test the applyComparator() function", function (assert) {
+  
+  // Test ideal valid inputs
+  assert.strictEqual(applyComparator("2>1"), true, "2>1 === true");
+  assert.strictEqual(applyComparator("1>2"), false, "1>2 === false");
+  
+  assert.strictEqual(applyComparator("2<1"), false, "2<1 === false");
+  assert.strictEqual(applyComparator("1<2"), true, "1<2 === true");
+  
+  assert.strictEqual(applyComparator("2=1"), false, "2=1 === false");
+  assert.strictEqual(applyComparator("2=2"), true, "2=2 === true");
+  
+  assert.strictEqual(applyComparator("2>=1"), true, "2>=1 === true");
+  assert.strictEqual(applyComparator("1>=2"), false, "1>=2 === false");
+  assert.strictEqual(applyComparator("2>=2"), true, "2>=2 === true");
+  
+  assert.strictEqual(applyComparator("2<=1"), false, "2<=1 === false");
+  assert.strictEqual(applyComparator("1<=2"), true, "1<=2 === true");
+  assert.strictEqual(applyComparator("2<=2"), true, "2<=2 === true");
+  
+  // Test variables
+  assert.strictEqual(applyComparator("num>1", {"num":2}), true, "num>1 === true (num=2)");
+  assert.strictEqual(applyComparator("2>num", {"num":1}), true, "2>num === true (num=1)");
+  assert.strictEqual(applyComparator("num<1", {"num":2}), false, "num<1 === false (num=2)");
+  assert.strictEqual(applyComparator("2<num", {"num":1}), false, "2<num === false (num=1)");
+  assert.strictEqual(applyComparator("num=num", {"num":1}), true, "2<num === false (num=1)");
+  
+  // Test unideal valid inputs
+  assert.strictEqual(applyComparator("2 > 1"), true, "2 > 1 === true");
+  assert.strictEqual(applyComparator(" num > 1", {"num":2}), true, " num > 1 === true (num=2)");
+  assert.strictEqual(applyComparator(" num =   num ", {"num":2}), true, " num =   num  === true (num=2)");
+  
+});
