@@ -1,52 +1,4 @@
 /**
- * Apply a comparator to three strings containing a number, a comparator, and a number
- * @param {string} input - The string to parse
- * @param {object} variables - Object containing variable names (keys) to replace with their values before evaluating 
- * @returns {boolean} The result of the comparison
- */
-function applyComparator(input, variables) {
-	
-	// Get the location of the start of the comparator
-	var index = input.search(/=|<|>|!/);
-	
-	// Make sure input works
-	if(input.length < 2 || index < 1 || index + 1 === input.length)
-		return false;
-	
-	// Grab left side of comparator
-	var left = input.substring(0, index).trim();
-	if(variables !== null && typeof variables === "object" && left in variables)
-		left = Number(variables[left]);
-	else
-		left = Number(left);
-	
-	// Grab comparator
-	var right = input.substring(index+1).trim();
-	var comparator = input[index];
-	if(right[0] === "=") {
-		comparator += "=";
-		right = right.substring(1);
-	}
-	
-	// Grab right side of comparator
-	if(variables !== null && typeof variables === "object" && right in variables)
-		right = Number(variables[right]);
-	else
-		right = Number(right);
-	
-	// Apply comparator and return result
-	switch(comparator) {
-		case ">": return left > right;
-		case "<": return left < right;
-		case "=": return left === right;			
-		case ">=": return left >= right;
-		case "<=": return left <= right;
-		case "!=": return left != right;
-		default: return false;
-	}
-}
-
-/**
  * Displays the delta between the specified data and now, in the specified format, as the innerHTML of the specified element.
  * @param {Element} element - The element in which to display the time delta
  * @param {Date} date - The date to compare to now
@@ -124,10 +76,9 @@ function fill(string, replacements) {
 /**
  * Removes parts of the string depending on whether the conditions for that part are satisfied
  * @param {string} string - The string to filter
- * @param {object} conditions - The current conditions to compare the string to
  */
-function filter(string, conditions) {
-	if(string == null || !(typeof string === "string") || conditions == null)
+function filter(string) {
+	if(string == null || !(typeof string === "string"))
 		return string;
 		
 	var result = "";
@@ -149,7 +100,7 @@ function filter(string, conditions) {
 			
 			// Add the conditional if the condition is evaluated as true
 			var conditional = current.split(":");
-			if(conditional.length === 2 && applyComparator(conditional[0], conditions))
+			if(conditional.length === 2 && eval(conditional[0]))
 				result += conditional[1];
 							
 			// Continue going through the string

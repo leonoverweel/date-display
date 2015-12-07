@@ -110,97 +110,32 @@ QUnit.test("Test the filter() function", function (assert) {
   
   // Greater than, actually greater than
   assert.strictEqual(
-    filter(
-      "Only 2 day[day>1:s] until Monday!",
-      {
-        "day": 2
-      }
-    ),
+    filter("Only 2 day[2>1:s] until Monday!"),
     "Only 2 days until Monday!",
     "Greater than, actually greater than");
     
   // Greater than, not actually greater than
   assert.strictEqual(
-    filter(
-      "Only 1 day[day>1:s] until Monday!",
-      {
-        "day": 1
-      }
-    ),
+    filter("Only 1 day[1>1:s] until Monday!"),
     "Only 1 day until Monday!",
     "Greater than, not actually greater than");
     
   // Less than, actually less than
   assert.strictEqual(
-    filter(
-      "4 days until Christmas.[day<5: That's less than 5 days!]",
-      {
-        "day": 4
-      }
-    ),
+    filter("4 days until Christmas.[4<5: That's less than 5 days!]"),
     "4 days until Christmas. That's less than 5 days!",
     "Less than, actually less than");
 
   // Less than, not actually less than
   assert.strictEqual(
-    filter(
-      "4 days until Christmas.[day<5: That's less than 5 days!]",
-      {
-        "day": 5
-      }
-    ),
-    "4 days until Christmas.",
+    filter("6 days until Christmas.[6<5: That's less than 5 days!]"),
+    "6 days until Christmas.",
     "Less than, not actually less than");
     
   // Equal to than, actually equal to
   assert.strictEqual(
-    filter(
-      "7 days until New Years.[day=7: Exactly one week!]",
-      {
-        "day": 7
-      }
-    ),
+    filter("7 days until New Years.[7==7: Exactly one week!]"),
     "7 days until New Years. Exactly one week!",
     "Equal to than, actually equal to");
 
-});
-
-/**
- * Test the applyComparator() function
- */
-QUnit.test("Test the applyComparator() function", function (assert) {
-  
-  // Test ideal valid inputs
-  assert.strictEqual(applyComparator("2>1"), true, "2>1 === true");
-  assert.strictEqual(applyComparator("1>2"), false, "1>2 === false");
-  
-  assert.strictEqual(applyComparator("2<1"), false, "2<1 === false");
-  assert.strictEqual(applyComparator("1<2"), true, "1<2 === true");
-  
-  assert.strictEqual(applyComparator("2=1"), false, "2=1 === false");
-  assert.strictEqual(applyComparator("2=2"), true, "2=2 === true");
-  
-  assert.strictEqual(applyComparator("2>=1"), true, "2>=1 === true");
-  assert.strictEqual(applyComparator("1>=2"), false, "1>=2 === false");
-  assert.strictEqual(applyComparator("2>=2"), true, "2>=2 === true");
-  
-  assert.strictEqual(applyComparator("2<=1"), false, "2<=1 === false");
-  assert.strictEqual(applyComparator("1<=2"), true, "1<=2 === true");
-  assert.strictEqual(applyComparator("2<=2"), true, "2<=2 === true");
-  
-  assert.strictEqual(applyComparator("2!=1"), true, "2!=1 === true");
-  assert.strictEqual(applyComparator("2!=2"), false, "2!=2 === false");
-  
-  // Test variables
-  assert.strictEqual(applyComparator("num>1", {"num":2}), true, "num>1 === true (num=2)");
-  assert.strictEqual(applyComparator("2>num", {"num":1}), true, "2>num === true (num=1)");
-  assert.strictEqual(applyComparator("num<1", {"num":2}), false, "num<1 === false (num=2)");
-  assert.strictEqual(applyComparator("2<num", {"num":1}), false, "2<num === false (num=1)");
-  assert.strictEqual(applyComparator("num=num", {"num":1}), true, "2<num === false (num=1)");
-  
-  // Test unideal valid inputs
-  assert.strictEqual(applyComparator("2 > 1"), true, "2 > 1 === true");
-  assert.strictEqual(applyComparator(" num > 1", {"num":2}), true, " num > 1 === true (num=2)");
-  assert.strictEqual(applyComparator(" num =   num ", {"num":2}), true, " num =   num  === true (num=2)");
-  
 });

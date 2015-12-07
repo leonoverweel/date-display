@@ -42,7 +42,7 @@ For a date that is 1 hour and 150 seconds away, for example, `{hr}` will be 1, `
 
 Conditionals allow you to change whether something is displayed depending on the values of different parts of the time delta. This allows you to, for example, automatically change names of time units to be singular if only that time unit is equal to 1.
 
-The basic construction of conditionals is: `[condition:result]`, where the `condition` can use any of the variables from the partial and complete tags (such as `day` and `hr-c`) combined with constants and any one of the following mathematical comparators: `=`, `>`, `<`, `>=`, `<=`, `!=`. The result will only be shown if the condition is evaluated as true.
+The basic construction of conditionals is: `[condition:result]`, where the `condition` can use any of the variables from the partial and complete tags (such as `{day}` and `{hr-c}`) combined with constants and any one of the following mathematical comparators: `==`, `>`, `<`, `>=`, `<=`, `!=`. The result will only be shown if the condition is evaluated as true.
 
 Examples:
 - `{day} day[day!=1:s]` would display "2 days", "1 day" or "0 days" depending on the value of `day`
