@@ -1,6 +1,10 @@
 # time-delta.js
 
-You can use time-delta.js to display a live countdown to a time zone-specific date/ time. The project was made specifically with countdowns to events in mind, and allows you to display the time difference between the specified date/ time and now in a completely customizable way. 
+You can use time-delta.js to display a live countdown to a date/ time. The project was made specifically with countdowns to events in mind, and allows you to display the time difference between the specified date/ time and now in a completely customizable way. 
+
+## Deprecated
+
+When I started to implement time zone support, I realized how weird Javascript is with time zones and dates in general. Moment.js could help in dealing with this, but that already has relative time support, which is a big part of the problem time-delta.js was trying to solve. This was a fun project nonetheless.
 
 ## Getting Started
 
@@ -13,7 +17,6 @@ Here's a short example that shows a basic time-delta.js countdown on an HTML pag
 display(
 	"time-delta-1",
 	new Date("2020-04-18T14:00:00"),
-	1,
 	"in {day-c} day[{day-c}!=1:s] and {hr} hour[{hr}!=1:s]",
 	"{day-c} day[{day-c}!=1:s] and {hr} hour[{hr}!=1:s] ago"
 );
