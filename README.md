@@ -4,7 +4,9 @@ You can use time-delta.js to display a live countdown to a date/ time. The proje
 
 ## Deprecated
 
-When I started to implement time zone support, I realized how weird Javascript is with time zones and dates in general. Moment.js could help in dealing with this, but that already has relative time support, which is a big part of the problem time-delta.js was trying to solve. This was a fun project nonetheless.
+When I started to implement time zone support, I realized how weird Javascript is with time zones and dates in general. Moment.js could help in dealing with this, but that already has relative time support, which is a big part of the problem time-delta.js was trying to solve. 
+
+So I'm deprecating this project; it was a fun way to get into JavaScript a little more, but ultimately won't be very useful in the future. Some aspects, like the Format String, might be cool to fork into Moment.js, which is something I'll look into more in the future.
 
 ## Getting Started
 
