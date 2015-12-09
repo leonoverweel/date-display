@@ -15,9 +15,6 @@
 				// The date/ time to count down to
 				new Date("2015-01-01T00:00:00"),
 				
-				// The date's offset from UTC, in hours (New York, for example, would be -5)
-				0,
-				
 				// The format string for before the date
 				"starts in {wk-c} week[{wk}!=1:s], {day} day[{day}!=1:s], {hr} hour[{hr}!=1:s], {min} minute[{min}!=1:s] and {sec} second[{sec}!=1:s]",
 				
@@ -27,18 +24,16 @@
 			
 			display(
 				"time-2", 
-				new Date("2017-01-01T00:00:00"),
-				0,
+				new Date("2017-01-01T00:00:00"), 
 				"starts in {wk-c} week[{wk}!=1:s], {day} day[{day}!=1:s], {hr} hour[{hr}!=1:s], {min} minute[{min}!=1:s] and {sec} second[{sec}!=1:s]",
 				"started {wk-c} week[{wk}!=1:s], {day} day[{day}!=1:s], {hr} hour[{hr}!=1:s], {min} minute[{min}!=1:s] and {sec} second[{sec}!=1:s] ago"
 			);
 			
 			display(
 				"time-3",
-				new Date(Date.UTC(2015,11,10,23,0,0)),
-				1,
-				"is <span style=\"color:red;\">{day-c}</span> day[{day-c}!=1:s] and <span style=\"color:red;\">{hr}</span> hour[{hr}!=1:s] from now {min}",
-				"was <span style=\"color:red;\">{day-c}</span> day[{day-c}!=1:s] ago"
+				new Date("2016-04-18T13:50:00"),
+				"is <span style=\"font-size:2em;\">{day-c}</span> day[{day-c}!=1:s] and <span style=\"font-size:2em;\">{hr}</span> hour[{hr}!=1:s] from now",
+				"was <span style=\"font-size:2em;\">{day-c}</span> day[{day-c}!=1:s] ago"
 			);
 		</script>
 	</body>

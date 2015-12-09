@@ -80,7 +80,7 @@ QUnit.test("Test the fill() function", function (assert) {
  * Test the generateDateDelta() function
  */
 QUnit.test("Test the generateDateDelta() function", function (assert) {
-
+  
   // No params
   assert.strictEqual(generateDateDelta(), "", "No params");
   
@@ -95,10 +95,9 @@ QUnit.test("Test the generateDateDelta() function", function (assert) {
 
   // Date first param, string second param (no keys)
   assert.strictEqual(generateDateDelta(
-    new Date("2015-12-18"), 1, "Input"), 
+    new Date("2015-12-18"), "Input"), 
     "Input", 
     "Date first param, string second param");
-    
 });
 
 /**

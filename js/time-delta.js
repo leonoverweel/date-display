@@ -2,11 +2,10 @@
  * Displays the delta between the specified data and now, in the specified format, as the innerHTML of the specified element.
  * @param {Element} element - The element in which to display the time delta
  * @param {Date} date - The date to compare to now
- * @param {number} offset - The offset (in hours) from UTC in which the date is set
  * @param {string} formatBefore - The format in which to display the time delta
  * @param {string} formatAfter - Optional: a different format to use after the date has passed
  */
-function display(elementId, date, offset, formatBefore, formatAfter) {
+function display(elementId, date, formatBefore, formatAfter) {
 	
 	// Make sure the element, date and formatBefore are present
 	if(elementId == null || document.getElementById(elementId) == null || date == null || formatBefore == null)
@@ -15,14 +14,14 @@ function display(elementId, date, offset, formatBefore, formatAfter) {
 	// Display the appropriately formatted time delta in the element
 	var element = document.getElementById(elementId);
 	if(date - Date.now() > 0)
-		element.innerHTML = generateDateDelta(date, offset, formatBefore);
+		element.innerHTML = generateDateDelta(date, formatBefore);
 	else
 		(formatAfter == null) ? 
-			element.innerHTML = generateDateDelta(date, offset, formatBefore) : 
-			element.innerHTML = generateDateDelta(date, offset, formatAfter);
+			element.innerHTML = generateDateDelta(date, formatBefore) : 
+			element.innerHTML = generateDateDelta(date, formatAfter);
 		
 	setTimeout( function() {
-		display(elementId, date, offset, formatBefore, formatAfter);
+		display(elementId, date, formatBefore, formatAfter);
 	}, 1000);
 }
 
@@ -116,26 +115,23 @@ function filter(string) {
 /**
  * Generates the delta between the specified data and now, in the specified format.
  * @param {Date} date - The date to compare to now
- * @param {number} offset - The offset (in hours) from UTC in which the date is set
  * @param {string} format - The format in which to display the time delta
  * @returns {string} The date delta
  */
-function generateDateDelta(date, offset, format) {
+function generateDateDelta(date, format) {
 	if(date == null || !(date instanceof Date) || format == null || !(typeof format === "string"))
 		return "";
 	
-	var timezoneCorrectionMs = (offset * 60 * 60 * 1000) + (new Date().getTimezoneOffset() * 60 * 1000);
-	var now = Date.now() + timezoneCorrectionMs;
+	var now = Date.now();
 	var delta = Math.abs(date - now);
-	
 	
 	// Calculate complete milliseconds, seconds, minutes, hours, days, weeks
 	var milC = delta;
-	var secC = Math.floor(delta / (1000));
-	var minC = Math.floor(delta / (1000 * 60));
-	var hrC = Math.floor(delta / (1000 * 60 * 60));
-	var dayC = Math.floor(delta / (1000 * 60 * 60 * 24));
-	var wkC = Math.floor(delta / (1000 * 60 * 60 * 24 * 7));
+	var secC = Math.floor(delta / 1000);
+	var minC = Math.floor(delta / 60000);
+	var hrC = Math.floor(delta / 360000);
+	var dayC = Math.floor(delta / 86400000);
+	var wkC = Math.floor(delta / 604800000);
 	
 	// Create replacements object
 	var replacements = {
